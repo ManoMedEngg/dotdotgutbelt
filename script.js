@@ -120,7 +120,6 @@ document.getElementById('clearBtn').onclick = () => {
 
 function getCircleScore(pts) {
   if (pts.length < 10) return 0;
-  // Find centroid
   let sumX = 0, sumY = 0;
   for (const [x, y] of pts) {
     sumX += x;
@@ -128,20 +127,20 @@ function getCircleScore(pts) {
   }
   const cx = sumX / pts.length;
   const cy = sumY / pts.length;
-  // Find average radius
+
   let sumR = 0;
   for (const [x, y] of pts) {
     sumR += Math.hypot(x - cx, y - cy);
   }
   const avgR = sumR / pts.length;
-  // Find std deviation of radius
+
   let sumErr = 0;
   for (const [x, y] of pts) {
     const r = Math.hypot(x - cx, y - cy);
     sumErr += Math.abs(r - avgR);
   }
   const meanErr = sumErr / pts.length;
-  // Score: 100% is perfect circle, lower is less round
+
   let score = Math.max(0, 100 - (meanErr / avgR) * 100);
   return Math.round(score);
 }
@@ -164,7 +163,7 @@ document.getElementById('submitBtn').onclick = () => {
   const score = getCircleScore(points);
   if (score >= 60 && score <= 100) {
     showPopup(
-      `🎉 <b>உங்கள் அன்பான வாழ்த்துகளுக்கு மனமார்ந்த நன்றிகள்! உங்கள் அன்பு என்றும் எனக்கு வேண்டும். 😊🙏❤️</b> 🎂<br>That was a <b>${score}%</b> perfect circle!<br>Thank you for playing! 🥳<br><span style="font-size:2rem;">🎈🎊🎁</span>`,
+      `🎉 <b>Happy Birthday!</b> 🎂<br>That was a <b>${score}%</b> perfect circle!<br>Thanks for playing! 🥳<br><span style="font-size:2rem;">🎈🎊🎁</span>`,
       true
     );
   } else {
