@@ -7,7 +7,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .container {
@@ -38,6 +38,11 @@ canvas {
   position: relative;
   border: 2px solid #00eaff;
   transition: box-shadow 0.3s;
+  /* Responsive sizing */
+  width: min(90vw, 400px);
+  height: min(90vw, 400px);
+  /* Critical for Android touch: prevents page scroll/zoom while drawing */
+  touch-action: none;
 }
 
 canvas:active {
@@ -146,9 +151,25 @@ canvas::after {
 @media (max-width: 600px) {
   .container {
     padding: 1rem 0.5rem;
+    border-radius: 16px;
+  }
+  h1 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+  button {
+    padding: 0.6rem 1.1rem;
+    font-size: 1rem;
   }
   .popup-content {
-    min-width: 200px;
-    padding: 1rem 0.5rem;
+    min-width: unset;
+    width: 90vw;
+    padding: 1rem 1rem;
+  }
+  #popupMessage {
+    font-size: 1.1rem;
+  }
+  #popupImage {
+    width: 130px;
   }
 }

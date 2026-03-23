@@ -5,14 +5,16 @@ let points = [];
 
 // Support high-DPI and mobile responsive canvas
 function resizeCanvas() {
-  const rect = canvas.getBoundingClientRect();
   const scale = window.devicePixelRatio || 1;
-  canvas.width = Math.floor(rect.width * scale);
-  canvas.height = Math.floor(rect.height * scale);
+  // Use clientWidth/clientHeight (CSS layout size) to avoid feedback loop
+  const cssW = canvas.clientWidth || 400;
+  const cssH = canvas.clientHeight || 400;
+  canvas.width = Math.floor(cssW * scale);
+  canvas.height = Math.floor(cssH * scale);
   ctx.setTransform(scale, 0, 0, scale, 0, 0);
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  points = [];
   drawWaterDroplets();
 }
 
@@ -21,9 +23,11 @@ resizeCanvas();
 
 // Water droplet effect
 function drawWaterDroplets() {
+  const w = canvas.clientWidth || 400;
+  const h = canvas.clientHeight || 400;
   for (let i = 0; i < 8; i++) {
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
+    const x = Math.random() * w;
+    const y = Math.random() * h;
     const r = 8 + Math.random() * 12;
     ctx.save();
     ctx.globalAlpha = 0.18 + Math.random() * 0.12;
@@ -36,8 +40,6 @@ function drawWaterDroplets() {
     ctx.restore();
   }
 }
-
-drawWaterDroplets();
 
 canvas.addEventListener('mousedown', (e) => {
   drawing = true;
