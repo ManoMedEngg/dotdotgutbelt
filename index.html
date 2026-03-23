@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Circle Game 🎂</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 Draw a Perfect Circle!</h1>
+    <canvas id="drawCanvas" width="400" height="400"></canvas>
+    <div class="controls">
+      <button id="clearBtn">Clear</button>
+      <button id="submitBtn">Submit</button>
+    </div>
+    <div id="popup" class="popup hidden">
+      <div class="popup-content">
+        <span id="closePopup">&times;</span>
+        <div id="popupMessage"></div>
+        <img id="popupImage" src="" alt="" class="hidden"/>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
